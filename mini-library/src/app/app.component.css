@@ -1,0 +1,71 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.mat-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #424242;
+    /* Neutral dark gray */
+    padding: 0 24px;
+}
+
+.title {
+    color: white;
+    font-size: 13;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.nav-buttons button {
+    color: white;
+    font-weight: 500;
+}
+
+.main-content {
+    flex: 1;
+    padding: 84px 24px 80px;
+    /* top padding to account for fixed header */
+    background-color: #f5f5f5;
+    /* Light gray background */
+    min-height: calc(100vh - 64px - 64px);
+    /* viewport height minus header and footer */
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background-color: #424242;
+    /* Matching header color */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    z-index: 1000;
+}
+
+/* AG Grid specific styles */
+.ag-theme-material {
+    height: 100%;
+    width: 100%;
+    --ag-header-background-color: #f5f5f5;
+    --ag-header-foreground-color: #424242;
+    --ag-header-cell-hover-background-color: #e0e0e0;
+    --ag-row-hover-color: #fafafa;
+}

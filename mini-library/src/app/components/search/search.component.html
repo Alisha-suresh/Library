@@ -1,0 +1,34 @@
+<div class="search-container">
+    <mat-card class="search-card">
+        <mat-card-header>
+            <mat-card-title>Search Books</mat-card-title>
+            <mat-card-subtitle>Find books available online and in stores</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div class="search-form">
+                <mat-form-field appearance="outline" class="search-input">
+                    <mat-label>Search by title or author</mat-label>
+                    <input matInput [(ngModel)]="searchQuery" placeholder="Enter book title or author">
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" (click)="onSearch()">
+                    Search
+                </button>
+                <button mat-raised-button color="accent" [disabled]="selectedBooks.length === 0"
+                    (click)="openBookingDialog()">
+                    Book Selected ({{selectedBooks.length}})
+                </button>
+            </div>
+
+            <!-- Results Grid -->
+            <div class="grid-container" *ngIf="searchResults.length > 0">
+                <ag-grid-angular class="ag-theme-material" [rowData]="searchResults" [columnDefs]="columnDefs"
+                    [pagination]="true" [paginationAutoPageSize]="true" [domLayout]="'autoHeight'"
+                    [defaultColDef]="defaultColDef" [rowSelection]="'multiple'" (gridReady)="onGridReady($event)"
+                    (selectionChanged)="onSelectionChanged()">
+                </ag-grid-angular>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
