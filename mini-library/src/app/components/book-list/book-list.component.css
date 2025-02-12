@@ -2,3 +2,9 @@
     height: 400px;
     width: 100%;
 }
+
+.main-content[_ngcontent-ng-c362237263] {
+    min-height: calc(100vh - 128px);
+    padding: 1rem;
+    width: 50%;
+}
