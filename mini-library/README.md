@@ -1,59 +1,31 @@
-# MiniLibrary
+# Mini Library App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
+A mini library app that allows users to search for available books, view whether they are available online or offline, and book them if needed. The app shows locations for offline books and provides links to online books.
 
-## Development server
+## Features
+- Search books by title or author.
+- View availability status (online or offline).
+- Links to online books.
+- Location and booking form for offline books.
+- Order history section to track current and past bookings.
 
-To start a local development server, run:
+## Installation
 
-```bash
-ng serve
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/minilibrary.git
+2. Navigate to the project directory:
+   cd minilibrary
+3. Install dependencies:
+   npm install
+4. Start the development server:
+   npm start
+5. Open the app at http://localhost:4200 in your browser.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Usage
+- Open the app in your browser (usually on `http://localhost:4200`).
+- Use the search bar to search for books by title or author.
+- View the availability status of the book.
+- Click on an online book link to visit the website.
+- For offline books, fill out the booking form to confirm your reservation.
+- Check your booking status in the "Orders" section.
