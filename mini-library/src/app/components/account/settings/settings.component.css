@@ -1,0 +1,23 @@
+.settings-card {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.actions-container {
+    display: flex;
+    gap: 16px;
+    margin-top: 20px;
+}

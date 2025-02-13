@@ -1,0 +1,8 @@
+.orders-card {
+    margin: 20px;
+}
+
+:host ::ng-deep .ag-theme-material {
+    width: 100%;
+    min-height: 400px;
+}
