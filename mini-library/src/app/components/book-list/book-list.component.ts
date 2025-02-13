@@ -37,9 +37,12 @@ export class BookListComponent {
   ];
 
   books = [
-    { id: 1, title: 'Book 1', author: 'Author 1', description: 'Description of Book 1', rating: 3 },
-    { id: 2, title: 'Book 2', author: 'Author 2', description: 'Description of Book 2', rating: 4 },
-    { id: 3, title: 'Book 3', author: 'Author 3', description: 'Description of Book 3', rating: 4 }
+    { id: 1, title: 'A Court of Thorns and Roses', author: ' Sarah J. Maas', description: 'Description of Book 1', rating: 5 },
+    { id: 2, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', description: 'Description of Book 2', rating: 4 },
+    { id: 3, title: 'The Last Girl to Die', author: 'Helen Fields ', description: 'Description of Book 3', rating: 2 },
+    { id: 4, title: 'Her Last Walk Home', author: ' Patricia Gibney ', description: 'Description of Book 4', rating: 1 },
+    { id: 5, title: 'Percy Jackson: The Complete Series (Books 1, 2, 3, 4, 5)', author: ' Rick Riordan', description: 'Description of Book 5', rating: 4 },
+    { id: 6, title: 'Twilight', author: 'Stephenie Meyer ', description: 'Description of Book 6', rating: 4 }
   ];
 
   ngOnInit() {

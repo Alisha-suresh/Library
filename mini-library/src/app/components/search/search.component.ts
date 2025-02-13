@@ -83,12 +83,12 @@ export class SearchComponent implements OnInit {
   mockSearchResults: BookAvailability[] = [
     {
       id: 1,
-      title: 'The Great Gatsby',
-      author: 'F. Scott Fitzgerald',
+      title: 'A Court of Thorns and Roses',
+      author: 'Sarah J. Maas',
       format: 'Online',
       location: 'Project Gutenberg',
       availability: true,
-      link: 'https://www.gutenberg.org/ebooks/64317'
+      link: 'https://amzn.eu/d/iqvivOM'
     },
     {
       id: 2,
@@ -106,7 +106,7 @@ export class SearchComponent implements OnInit {
       format: 'Online',
       location: 'Amazon Kindle',
       availability: true,
-      link: 'https://amazon.com/kindle-store'
+      link: 'https://amzn.eu/d/d15PZds'
     }
   ];
 
