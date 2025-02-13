@@ -10,6 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider'
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from './services/auth.service';
 
 
 @Component({
@@ -25,24 +26,20 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    public authService: AuthService
+  ) {
+    this.authService.checkAuthStatus();
+  }
 
   signOut() {
-    // Implement your sign out logic here
-    console.log('Signing out...');
-    // Clear user session/local storage
-    localStorage.clear();
-    // Redirect to login page
-    this.router.navigate(['/login']);
+    this.authService.logout();
   }
 
 
-  deleteAccount() {
-    // Implement your delete account logic here
-    console.log('Deleting account...');
-    // Make API call to delete account
-    // After successful deletion
-    this.signOut();
-  }
+  // deleteAccount() {
+  //   console.log('Deleting account...');
+
+  //   this.signOut();
+  // }
 }

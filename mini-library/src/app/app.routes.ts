@@ -5,13 +5,18 @@ import { SearchComponent } from './components/search/search.component';
 import { ProfileComponent } from './components/account/profile/profile.component';
 import { OrdersComponent } from './components/account/orders/orders.component';
 import { SettingsComponent } from './components/account/settings/settings.component';
+import { authGuard } from './services/auth.guard';
+import { LoginComponent } from './components/account/login/login.component';
+
 
 export const appRoutes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'books', component: BookListComponent },
-    { path: 'search', component: SearchComponent },
-    { path: 'profile', component: ProfileComponent },
-    { path: 'orders', component: OrdersComponent },
-    { path: 'settings', component: SettingsComponent },
-    { path: '**', redirectTo: '' }
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'login', component: LoginComponent },
+    { path: 'home', component: HomeComponent, canActivate: [authGuard] },
+    { path: 'books', component: BookListComponent, canActivate: [authGuard] },
+    { path: 'search', component: SearchComponent, canActivate: [authGuard] },
+    { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+    { path: 'orders', component: OrdersComponent, canActivate: [authGuard] },
+    { path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
+    { path: '**', redirectTo: 'home' }
 ];

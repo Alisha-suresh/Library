@@ -1,5 +1,5 @@
-<mat-toolbar>
-  <span class="title" routerLink="/" style="cursor: pointer;">Mini Library</span>
+<mat-toolbar color="primary" *ngIf="authService.isAuthenticated$ | async">
+  <span class="title" routerLink="/home" style="cursor: pointer;">Mini Library</span>
   <span class="spacer"></span>
   <nav class="nav-buttons">
     <button mat-button routerLink="/books" routerLinkActive="active">
@@ -31,10 +31,10 @@
         <mat-icon>exit_to_app</mat-icon>
         <span>Sign Out</span>
       </button>
-      <button mat-menu-item (click)="deleteAccount()" class="delete-account">
+      <!-- <button mat-menu-item (click)="deleteAccount()" class="delete-account">
         <mat-icon>delete_forever</mat-icon>
         <span>Delete Account</span>
-      </button>
+      </button> -->
     </mat-menu>
   </nav>
 </mat-toolbar>
