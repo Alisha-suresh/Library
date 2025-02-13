@@ -25,13 +25,25 @@ export class BookListComponent {
     { field: 'id', headerName: 'ID', sortable: true, filter: true, width: 100 },
     { field: 'title', headerName: 'Title', sortable: true, filter: true },
     { field: 'author', headerName: 'Author', sortable: true, filter: true },
-    { field: 'description', headerName: 'Description', width: 300 }
+    { field: 'description', headerName: 'Description', width: 300 },
+    {
+      field: 'rating',
+      headerName: 'Rating & Reviews',
+      width: 300,
+      cellRenderer: (params: any) => {
+        return this.getStarRating(params.value);
+      }
+    }
   ];
 
   books = [
-    { id: 1, title: 'Book 1', author: 'Author 1', description: 'Description of Book 1' },
-    { id: 2, title: 'Book 2', author: 'Author 2', description: 'Description of Book 2' },
-    { id: 3, title: 'Book 3', author: 'Author 3', description: 'Description of Book 3' }
+    { id: 1, title: 'Book 1', author: 'Author 1', description: 'Description of Book 1', rating: 3 },
+    { id: 2, title: 'Book 2', author: 'Author 2', description: 'Description of Book 2', rating: 4 },
+    { id: 3, title: 'Book 3', author: 'Author 3', description: 'Description of Book 3', rating: 4 }
   ];
+
+  getStarRating(rating: number): string {
+    return '⭐'.repeat(rating);
+  }
   modules = [ClientSideRowModelModule];
 }

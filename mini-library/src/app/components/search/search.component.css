@@ -18,6 +18,7 @@
 
 .search-input {
     flex: 1;
+    margin-bottom: -1.34375em;
 }
 
 .grid-container {
@@ -55,6 +56,8 @@
 :host ::ng-deep .ag-theme-material .ag-cell-value {
     padding: 0;
 }
+
+
 
 button[mat-raised-button] {
     height: 48px;

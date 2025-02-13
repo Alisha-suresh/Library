@@ -4,9 +4,5 @@ import { AppComponent } from './app/app.component';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app/app.routes';
 
-bootstrapApplication(AppComponent, {
-  providers: [
-    provideRouter(appRoutes)
-  ]
-})
+bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
