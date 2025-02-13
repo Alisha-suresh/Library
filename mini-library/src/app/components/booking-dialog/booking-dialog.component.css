@@ -1,0 +1,36 @@
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 400px;
+    padding-top: 16px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.selected-books {
+    margin-top: 16px;
+}
+
+.selected-books ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.selected-books li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.online-link {
+    color: #3f51b5;
+    text-decoration: none;
+    margin-top: 4px;
+    display: inline-block;
+}
+
+.online-link:hover {
+    text-decoration: underline;
+}

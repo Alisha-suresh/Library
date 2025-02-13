@@ -1,0 +1,67 @@
+<div *ngIf="!isOnlineOnly">
+    <h2 mat-dialog-title>Book Reservation</h2>
+    <mat-dialog-content>
+        <form [formGroup]="bookingForm" class="booking-form">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Full Name</mat-label>
+                <input matInput formControlName="fullName" placeholder="Enter your full name">
+                <mat-error *ngIf="bookingForm.get('fullName')?.hasError('required')">
+                    Full name is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" placeholder="Enter your email">
+                <mat-error *ngIf="bookingForm.get('email')?.hasError('required')">
+                    Email is required
+                </mat-error>
+                <mat-error *ngIf="bookingForm.get('email')?.hasError('email')">
+                    Please enter a valid email
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Phone</mat-label>
+                <input matInput formControlName="phone" placeholder="Enter your phone number">
+                <mat-error *ngIf="bookingForm.get('phone')?.hasError('required')">
+                    Phone number is required
+                </mat-error>
+            </mat-form-field>
+
+            <div class="selected-books">
+                <h3>Selected Books:</h3>
+                <ul>
+                    <li *ngFor="let book of data.selectedBooks">
+                        {{book.title}} by {{book.author}}
+                        <br>
+                        <small>Available at: {{book.location}}</small>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button (click)="onCancel()">Cancel</button>
+        <button mat-raised-button color="primary" [disabled]="!bookingForm.valid" (click)="onSubmit()">
+            Submit Booking
+        </button>
+    </mat-dialog-actions>
+</div>
+
+<div *ngIf="isOnlineOnly">
+    <h2 mat-dialog-title>Online Book Access</h2>
+    <mat-dialog-content>
+        <p>The selected book(s) are available online. You will be redirected to the respective platforms:</p>
+        <ul>
+            <li *ngFor="let book of data.selectedBooks">
+                {{book.title}} - {{book.location}}
+                <br>
+                <a [href]="book.link" target="_blank" class="online-link">Access Book</a>
+            </li>
+        </ul>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button (click)="onCancel()">Close</button>
+    </mat-dialog-actions>
+</div>

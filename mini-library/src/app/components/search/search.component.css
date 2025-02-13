@@ -1,0 +1,75 @@
+.search-container {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+.search-card {
+    box-shadow: none !important;
+}
+
+.search-form {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.search-input {
+    flex: 1;
+    margin-bottom: -1.34375em;
+}
+
+.grid-container {
+    margin-top: 24px;
+}
+
+/* AG Grid Custom Styles */
+:host ::ng-deep .ag-theme-material {
+    --ag-header-height: 48px;
+    --ag-row-height: 48px;
+    --ag-header-foreground-color: #000;
+    --ag-header-background-color: #fff;
+    --ag-odd-row-background-color: #fff;
+    --ag-row-border-color: rgba(0, 0, 0, 0.12);
+    --ag-cell-horizontal-padding: 16px;
+}
+
+:host ::ng-deep .ag-theme-material .ag-root-wrapper {
+    border: none;
+}
+
+:host ::ng-deep .ag-theme-material .ag-header-cell {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+:host ::ng-deep .ag-theme-material .ag-cell {
+    font-size: 14px;
+    line-height: 48px;
+    overflow: visible;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+:host ::ng-deep .ag-theme-material .ag-cell-value {
+    padding: 0;
+}
+
+
+
+button[mat-raised-button] {
+    height: 48px;
+    padding: 0 24px;
+}
+
+:host ::ng-deep .mat-mdc-card-header {
+    padding: 0;
+    margin-bottom: 16px;
+}
+
+:host ::ng-deep .mat-mdc-card-content {
+    padding: 0;
+    margin: 0;
+}
