@@ -42,24 +42,30 @@ export class BookingDialogComponent {
     });
   }
   ngOnInit() {
-    // Check if all selected books are online-only
     this.isOnlineOnly = this.data.selectedBooks.every(book => book.format === 'Online');
   }
 
   onSubmit() {
     if (this.bookingForm.valid) {
-      const bookingData = {
-        ...this.bookingForm.value,
-        books: this.data.selectedBooks,
-        bookingId: Math.random().toString(36).substr(2, 9)
-      };
-      this.dialogRef.close();
+      try {
+        const bookingData = {
+          ...this.bookingForm.value,
+          books: this.data.selectedBooks,
+          bookingId: Math.random().toString(36).substr(2, 9)
+        };
+        console.log('Booking data:', bookingData);
+        this.dialogRef.close();
 
-      this.dialog.open(BookingConfirmationComponent, {
-        width: '400px',
-        data: bookingData,
-        disableClose: true
-      });
+        this.dialog.open(BookingConfirmationComponent, {
+          width: '400px',
+          data: bookingData,
+          disableClose: true
+        });
+      } catch (error) {
+        console.error('Error during booking submission:', error);
+      }
+    } else {
+      console.log('Booking form is invalid');
     }
   }
 

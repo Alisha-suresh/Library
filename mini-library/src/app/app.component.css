@@ -13,6 +13,11 @@
     gap: 8px;
 }
 
+.mat-toolbar.mat-primary {
+    --mat-toolbar-container-background-color: #3f51b5;
+    /* --mat-toolbar-container-text-color: white; */
+}
+
 .delete-account {
     color: #f44336;
 }
@@ -22,7 +27,7 @@ mat-divider {
 }
 
 .active {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.099);
 }
 
 .main-content {

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet, Router } from '@angular/router';
 import { BookListComponent } from './components/book-list/book-list.component';
-import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { SearchComponent } from './components/search/search.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,7 +15,7 @@ import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, BookListComponent, BookDetailComponent, SearchComponent, RouterModule, MatToolbarModule, CommonModule, MatButtonModule, MatIconModule,
+  imports: [RouterOutlet, BookListComponent, SearchComponent, RouterModule, MatToolbarModule, CommonModule, MatButtonModule, MatIconModule,
     MatMenuModule, MatDividerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

@@ -42,8 +42,21 @@ export class BookListComponent {
     { id: 3, title: 'Book 3', author: 'Author 3', description: 'Description of Book 3', rating: 4 }
   ];
 
+  ngOnInit() {
+    console.log('BookListComponent initialized');
+  }
+
   getStarRating(rating: number): string {
-    return '⭐'.repeat(rating);
+    try {
+      if (rating < 1 || rating > 5) {
+        console.warn('Invalid rating:', rating);
+        return 'Invalid Rating';
+      }
+      return '⭐'.repeat(rating);
+    } catch (error) {
+      console.error('Error generating star rating:', error);
+      return 'Error';
+    }
   }
   modules = [ClientSideRowModelModule];
 }

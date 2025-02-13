@@ -28,22 +28,22 @@ export class OrdersComponent {
   ];
 
   ngOnInit() {
-    // Simulate loading orders
     this.orders = [
       {
         id: '1',
-        bookTitle: 'Angular Development',
+        bookTitle: 'Computer Security',
         orderDate: new Date(),
         returnDate: null,
         status: 'current'
       },
       {
         id: '2',
-        bookTitle: 'TypeScript Basics',
+        bookTitle: 'Computer Networks',
         orderDate: new Date('2024-01-15'),
         returnDate: new Date('2024-02-15'),
         status: 'past'
       }
     ];
+    console.log('Order list:', this.orders);
   }
 }

@@ -23,14 +23,7 @@ export class SettingsComponent {
 
   toggleDarkMode(event: any) {
     this.isDarkMode = event.checked;
-    // Implement dark mode logic
-  }
-
-  signOut() {
-    // Implement sign out logic
-  }
-
-  deleteAccount() {
 
   }
+
 }

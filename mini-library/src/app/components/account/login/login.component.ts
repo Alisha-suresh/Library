@@ -34,10 +34,23 @@ export class LoginComponent {
   ) { }
 
   onSubmit() {
-    if (this.authService.login(this.email, this.password)) {
-      this.router.navigate(['/home']);
-    } else {
-      this.snackBar.open('Invalid credentials', 'Close', {
+    try {
+      const loginSuccess = this.authService.login(this.email, this.password);
+
+      if (loginSuccess) {
+        console.log('Login successful for email:', this.email);
+        this.router.navigate(['/home']);
+      } else {
+        console.warn('Invalid credentials for email:', this.email);
+        this.snackBar.open('Invalid credentials', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+      }
+    } catch (error) {
+      console.error('Error during login attempt:', error);
+      this.snackBar.open('An error occurred during login', 'Close', {
         duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'top'

@@ -80,7 +80,6 @@ export class SearchComponent implements OnInit {
     }
   ];
 
-  // Mock data - replace with actual API call
   mockSearchResults: BookAvailability[] = [
     {
       id: 1,
@@ -116,15 +115,24 @@ export class SearchComponent implements OnInit {
   }
 
   onSelectionChanged() {
-    this.selectedBooks = this.gridApi.getSelectedRows();
+    try {
+      this.selectedBooks = this.gridApi.getSelectedRows();
+      console.log('Selected books:', this.selectedBooks);
+    } catch (error) {
+      console.error('Error while updating selected books:', error);
+    }
   }
 
   onSearch() {
-    // Simulate API call with mock data
-    this.searchResults = this.mockSearchResults.filter(book =>
-      book.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      book.author.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
+    try {
+      this.searchResults = this.mockSearchResults.filter(book =>
+        book.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        book.author.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+      console.log('Search results:', this.searchResults);
+    } catch (error) {
+      console.error('Error during search:', error);
+    }
   }
 
   openBookingDialog() {
@@ -138,13 +146,11 @@ export class SearchComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('Booking submitted:', result);
-        // Handle booking submission
         this.gridApi.deselectAll();
       }
     });
   }
 
   ngOnInit() {
-    // Initialize with empty results
   }
 }
