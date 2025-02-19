@@ -3,11 +3,20 @@ const mysql = require("mysql2/promise");
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const cors = require('cors');
+const bcrypt = require('bcrypt');
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+
+app.use(cors({
+    origin: 'http://localhost:4200', // Allow frontend requests
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true
+}));
 
 // MySQL connection pool
 const pool = mysql.createPool({
@@ -25,17 +34,18 @@ const JWT_SECRET = process.env.JWT_SECRET;
 // Middleware to verify JWT token
 function verifyToken(req, res, next) {
     const token = req.header("Authorization")?.replace("Bearer ", "");
+
     if (!token) return res.status(401).json({ message: "Access denied. No token provided." });
 
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
         req.user = decoded;  // Add user info to request object
-        next();  // Allow the request to proceed
+        next();  // Proceed with the request
     } catch (error) {
-        res.status(400).json({ message: "Invalid or expired token" });
+        console.log("Token verification failed:", error);  // Log error details for debugging
+        return res.status(401).json({ message: "Invalid or expired token" });
     }
 }
-
 // Login route to authenticate user and generate JWT token
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
@@ -51,7 +61,14 @@ app.post("/login", async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        const user = users[0];  // Assuming the user exists (you can compare password in real scenario)
+        const user = users[0];  // Assuming the user exists
+
+        // Compare password with the hashed one in the database
+        const isMatch = await bcrypt.compare(password, user.password);  // Compare entered password with hashed password in DB
+
+        if (!isMatch) {
+            return res.status(400).json({ message: "Invalid credentials" });
+        }
 
         // If password is correct, generate JWT token
         const token = jwt.sign(
@@ -78,9 +95,10 @@ app.post("/login", async (req, res) => {
 
 
 // SEARCH functionality with pagination
+// SEARCH functionality without pagination
+// SEARCH functionality without pagination
 app.get("/fetch-books", verifyToken, async (req, res) => {
-    const { title, page = 1, limit = 10 } = req.query;
-    const offset = (page - 1) * limit;
+    const { title } = req.query;
 
     try {
         const connection = await pool.getConnection();
@@ -94,9 +112,8 @@ app.get("/fetch-books", verifyToken, async (req, res) => {
                  LEFT JOIN book_locations bl ON b.id = bl.book_id
                  LEFT JOIN locations l ON bl.location_id = l.id
                  WHERE b.title LIKE ?
-                 GROUP BY b.id
-                 LIMIT ? OFFSET ?`,
-                [`%${title}%`, Number(limit), Number(offset)]
+                 GROUP BY b.id`,
+                [`%${title}%`]
             );
 
             if (existingBooks.length > 0) {
@@ -113,7 +130,7 @@ app.get("/fetch-books", verifyToken, async (req, res) => {
             }
 
             console.log(`❌ No books in database, fetching from API: ${title}`);
-            let books = await fetchGoogleBooks(title);
+            let books = await fetchGoogleBooks(title);  // Fetch books from API without pagination
 
             for (const book of books) {
                 const [bookResult] = await connection.query(
@@ -146,8 +163,6 @@ app.get("/fetch-books", verifyToken, async (req, res) => {
             await connection.commit();
             console.log(`✅ API books stored in database successfully.`);
 
-            books = books.slice(0, limit);  // Apply pagination for API results
-
             res.json({ message: "Books fetched from API", books });
 
         } catch (error) {
@@ -163,10 +178,11 @@ app.get("/fetch-books", verifyToken, async (req, res) => {
     }
 });
 
-// Fetch book data from external APIs
-async function fetchGoogleBooks(title, limit, offset) {
+// Fetch book data from external APIs without pagination
+async function fetchGoogleBooks(title) {
     console.log(`🌍 Fetching books from Google Books API for title: "${title}"`);
-    const googleResponse = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${title}&startIndex=${offset}&maxResults=${limit}`);
+    const googleResponse = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${title}`);  // Removed pagination
+
     let books = [];
 
     if (googleResponse.data.items) {

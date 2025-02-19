@@ -9,7 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider'
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './auth/services/auth.service';
 
 
 @Component({
@@ -22,13 +22,16 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'mini-library';
+  isAuthenticated = false;
 
   constructor(
     private router: Router,
     private dialog: MatDialog,
     public authService: AuthService
   ) {
-    this.authService.checkAuthStatus();
+    this.authService.isAuthenticated$.subscribe(status => {
+      this.isAuthenticated = status;
+    });
   }
 
   signOut() {

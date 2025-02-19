@@ -2,47 +2,47 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const pool = require('./db-config');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'TeHAFeK1VmH/UrIdl8gdhTXfYt6I/As2jF4o5S6+lklpaqjIXAXuQDoKX3x85zUZ1skr69GT/FWw6B/pyoz54g==';
+const JWT_SECRET = process.env.JWT_SECRET;
 
-async function register(req, res) {
-    const { name, email, password } = req.body;
+// async function register(req, res) {
+//     const { name, email, password } = req.body;
 
-    if (!name || !email || !password) {
-        return res.status(400).json({ message: 'Name, email, and password are required' });
-    }
+//     if (!name || !email || !password) {
+//         return res.status(400).json({ message: 'Name, email, and password are required' });
+//     }
 
-    try {
-        const connection = await pool.getConnection();
-        try {
-            // Check if user exists
-            const [existingUsers] = await connection.query(
-                'SELECT * FROM users WHERE email = ?',
-                [email]
-            );
+//     try {
+//         const connection = await pool.getConnection();
+//         try {
+//             // Check if user exists
+//             const [existingUsers] = await connection.query(
+//                 'SELECT * FROM users WHERE email = ?',
+//                 [email]
+//             );
 
-            if (existingUsers.length > 0) {
-                return res.status(400).json({ message: 'User already exists' });
-            }
+//             if (existingUsers.length > 0) {
+//                 return res.status(400).json({ message: 'User already exists' });
+//             }
 
-            // Hash password and create user
-            const hashedPassword = await bcrypt.hash(password, 10);
-            const [result] = await connection.query(
-                'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
-                [name, email, hashedPassword]
-            );
+//             // Hash password and create user
+//             const hashedPassword = await bcrypt.hash(password, 10);
+//             const [result] = await connection.query(
+//                 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
+//                 [name, email, hashedPassword]
+//             );
 
-            res.status(201).json({
-                message: 'User created successfully',
-                user: { id: result.insertId, name, email }
-            });
-        } finally {
-            connection.release();
-        }
-    } catch (error) {
-        console.error('Registration error:', error);
-        res.status(500).json({ message: 'Error creating user' });
-    }
-}
+//             res.status(201).json({
+//                 message: 'User created successfully',
+//                 user: { id: result.insertId, name, email }
+//             });
+//         } finally {
+//             connection.release();
+//         }
+//     } catch (error) {
+//         console.error('Registration error:', error);
+//         res.status(500).json({ message: 'Error creating user' });
+//     }
+// }
 
 async function login(req, res) {
     const { email, password } = req.body;
