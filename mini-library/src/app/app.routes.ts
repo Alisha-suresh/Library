@@ -5,7 +5,7 @@ import { SearchComponent } from './components/search/search.component';
 import { ProfileComponent } from './components/account/profile/profile.component';
 import { OrdersComponent } from './components/account/orders/orders.component';
 import { SettingsComponent } from './components/account/settings/settings.component';
-import { authGuard } from './services/auth.guard';
+import { authGuard } from './auth/services/auth.guard';
 import { LoginComponent } from './components/account/login/login.component';
 
 
